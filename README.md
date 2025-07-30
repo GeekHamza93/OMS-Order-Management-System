@@ -1,8 +1,53 @@
+# Order Management System
+
+## Description
+
+This project is an Order Management System (OMS) developed using Java, Quarkus, and Kafka. It leverages MongoDB for data storage and is designed to manage orders, handle events, and integrate with other services using modern cloud-native technologies.
+
+## Technologies Used
+
+- **Java**
+- **Quarkus**
+- **Apache Kafka**
+- **MongoDB**
+- **Kubernetes / OpenShift (optional)**
+- **REST API with JSON over HTTPS**
+
+## Prerequisites
+
+- Java 17 or higher
+- Apache Kafka
+- MongoDB
+- Maven
+- IntelliJ IDEA
+
+## Project Structure
+
+```plaintext
+src
+├── main
+│   ├── java
+│   │   ├── com.example.entity
+│   │   │   └── Order.java
+│   │   ├── com.example.repository
+│   │   │   └── OrderRepository.java
+│   │   ├── com.example.service
+│   │   │   └── OrderService.java
+│   │   ├── com.example.resource
+│   │   │   └── OrderResource.java
+│   │   ├── com.example.kafka
+│   │   │   ├── OrderProducer.java
+│   │   │   └── OrderConsumer.java
+│   ├── resources
+│   │   └── application.properties
+└── test
+    ├── java
+    │   └── com.example
+    │       └── OrderResourceTest.java
+
 # code-with-quarkus-oms
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
 ## Running the application in dev mode
 
@@ -53,22 +98,7 @@ You can then execute your native executable with: `./target/code-with-quarkus-om
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
-## Related Guides
 
-- OpenShift ([guide](https://quarkus.io/guides/deploying-to-openshift)): Generate OpenShift resources from annotations
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and Jakarta Persistence
-- REST Client - OpenID Connect Filter ([guide](https://quarkus.io/guides/security-openid-connect-client)): Use REST Client filter to get and refresh access tokens with OpenId Connect Client and send them as HTTP Authorization Bearer tokens
-- Messaging - Kafka Connector ([guide](https://quarkus.io/guides/kafka-getting-started)): Connect to Kafka with Reactive Messaging
-- YAML Configuration ([guide](https://quarkus.io/guides/config-yaml)): Use YAML to configure your Quarkus application
-- Logging JSON ([guide](https://quarkus.io/guides/logging#json-logging)): Add JSON formatter for console logging
-- Kubernetes ([guide](https://quarkus.io/guides/kubernetes)): Generate Kubernetes resources from annotations
-- REST Client - OpenID Connect Token Propagation ([guide](https://quarkus.io/guides/security-openid-connect-client)): Use REST Client to propagate the incoming Bearer access token or token acquired from Authorization Code Flow as HTTP Authorization Bearer token
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-
-## Provided Code
 
 ### YAML Config
 
@@ -99,3 +129,4 @@ Use Quarkus Messaging
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
