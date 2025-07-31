@@ -1,132 +1,112 @@
-# Order Management System
+🧾 OMS – Order Management System
+FR 🇫🇷
+OMS est une application Java Spring Boot modulaire et évolutive, conçue pour centraliser, suivre et gérer les commandes de bout en bout.
 
-## Description
+EN 🇬🇧
+OMS is a modular and scalable Java Spring Boot application designed to centralize, track, and manage orders end to end.
 
-This project is an Order Management System (OMS) developed using Java, Quarkus, and Kafka. It leverages MongoDB for data storage and is designed to manage orders, handle events, and integrate with other services using modern cloud-native technologies.
+🏗️ Stack technique / Tech Stack
+Backend: Java 17, Spring Boot 3, Spring Data JPA, Hibernate
 
-## Technologies Used
+Base de données / Database: PostgreSQL
 
-- **Java**
-- **Quarkus**
-- **Apache Kafka**
-- **MongoDB**
-- **Kubernetes / OpenShift (optional)**
-- **REST API with JSON over HTTPS**
+Sécurité / Security: Spring Security, JWT
 
-## Prerequisites
+Documentation API / API Docs: Swagger / OpenAPI
 
-- Java 17 or higher
-- Apache Kafka
-- MongoDB
-- Maven
-- IntelliJ IDEA
+Tests: JUnit 5, Mockito
 
-## Project Structure
+DevOps: Docker, Maven
 
-```plaintext
-src
-├── main
-│   ├── java
-│   │   ├── com.example.entity
-│   │   │   └── Order.java
-│   │   ├── com.example.repository
-│   │   │   └── OrderRepository.java
-│   │   ├── com.example.service
-│   │   │   └── OrderService.java
-│   │   ├── com.example.resource
-│   │   │   └── OrderResource.java
-│   │   ├── com.example.kafka
-│   │   │   ├── OrderProducer.java
-│   │   │   └── OrderConsumer.java
-│   ├── resources
-│   │   └── application.properties
-└── test
-    ├── java
-    │   └── com.example
-    │       └── OrderResourceTest.java
+IDE: IntelliJ IDEA
 
-# code-with-quarkus-oms
+🔧 Fonctionnalités principales / Main Features
+🔐 Authentification JWT (admin / utilisateur)
+JWT-based authentication (admin / user roles)
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+📦 Gestion des commandes (CRUD)
+Full CRUD for orders
 
-## Running the application in dev mode
+👥 Gestion des clients et des rôles
+Customer and role management
 
-You can run your application in dev mode that enables live coding using:
+🗃️ Pagination & filtrage
+Pagination & filtering
 
-```shell script
-./mvnw compile quarkus:dev
-```
+📄 Documentation Swagger intégrée
+Integrated Swagger API docs
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+🧪 Tests unitaires et d’intégration
+Unit & integration tests (mock & real DB)
 
-## Packaging and running the application
+🚀 Lancer le projet / Getting Started
+Pré-requis / Prerequisites
+Java 17+
 
-The application can be packaged using:
+Docker
 
-```shell script
-./mvnw package
-```
+Maven
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+Étapes / Steps
+bash
+Copier
+Modifier
+git clone https://github.com/GeekHamza93/OMS-Order-Management-System.git
+cd OMS-Order-Management-System
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+# PostgreSQL avec Docker
+docker-compose up -d
 
-If you want to build an _über-jar_, execute the following command:
+# Lancer l'application
+./mvnw spring-boot:run
+Swagger disponible ici / Swagger UI available at:
+http://localhost:8080/swagger-ui.html
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+🔐 Authentification JWT / JWT Authentication
+POST /api/auth/register → inscription / sign up
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+POST /api/auth/authenticate → obtenir un token / get a token
 
-## Creating a native executable
+Ajouter le token dans les headers / Add token to headers:
+Authorization: Bearer <token>
 
-You can create a native executable using:
+📁 Structure du projet / Project Structure
+text
+Copier
+Modifier
+src/
+├── config         # Config sécurité / Security config
+├── controller     # Contrôleurs REST / REST controllers
+├── dto            # Objets de transfert / DTOs
+├── entity         # Entités JPA / JPA entities
+├── repository     # Accès BDD / Repositories
+├── service        # Logique métier / Business logic
+├── utils          # Outils / Utilities
+✅ Exemple de test / Sample Test
+java
+Copier
+Modifier
+@Test
+void testCreateOrder() {
+    OrderDto order = new OrderDto("ClientA", "ProductX", 3);
+    OrderDto savedOrder = orderService.create(order);
+    assertNotNull(savedOrder.getId());
+}
+📌 Roadmap (à venir / coming soon)
+ Dashboard Angular (front-end)
 
-```shell script
-./mvnw package -Dnative
-```
+ Export PDF / Excel
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+ Webhook pour intégration tiers
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+ Notifications par email / Email notifications
 
-You can then execute your native executable with: `./target/code-with-quarkus-oms-1.0.0-SNAPSHOT-runner`
+🤝 Contributions
+FR : Les pull requests sont les bienvenues. Merci de créer une issue avant toute modification majeure.
+EN : Pull requests are welcome. Please open an issue before making major changes.
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-
-
-### YAML Config
-
-Configure your application with YAML
-
-[Related guide section...](https://quarkus.io/guides/config-reference#configuration-examples)
-
-The Quarkus application configuration is located in `src/main/resources/application.yml`.
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
-
-### Messaging codestart
-
-Use Quarkus Messaging
-
-[Related Apache Kafka guide section...](https://quarkus.io/guides/kafka-reactive-getting-started)
-
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
-
+👤 Auteur / Author
+Mohammed-Hamza Attar
+🧑‍💻 Freelance Java / Spring Boot / Full-Stack
+📫 med.hamza.attar@gmail.com
+🔗 Portfolio
