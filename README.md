@@ -1,9 +1,9 @@
 🧾 OMS – Order Management System
-FR 🇫🇷
-OMS est une application Java Spring Boot modulaire et évolutive, conçue pour centraliser, suivre et gérer les commandes de bout en bout.
+🇫🇷 FR
+OMS est une application Java Spring Boot, modulaire et évolutive, conçue pour centraliser, suivre et gérer les commandes de bout en bout.
 
-EN 🇬🇧
-OMS is a modular and scalable Java Spring Boot application designed to centralize, track, and manage orders end to end.
+🇬🇧 EN
+OMS is a modular and scalable Java Spring Boot application designed to centralize, track, and manage orders from end to end.
 
 🏗️ Stack technique / Tech Stack
 Backend: Java 17, Spring Boot 3, Spring Data JPA, Hibernate
@@ -20,69 +20,71 @@ DevOps: Docker, Maven
 
 IDE: IntelliJ IDEA
 
-🔧 Fonctionnalités principales / Main Features
+🔧 Fonctionnalités clés / Key Features
 🔐 Authentification JWT (admin / utilisateur)
 JWT-based authentication (admin / user roles)
 
-📦 Gestion des commandes (CRUD)
-Full CRUD for orders
+📦 Gestion des commandes (CRUD complet)
+Full CRUD operations for orders
 
 👥 Gestion des clients et des rôles
 Customer and role management
 
-🗃️ Pagination & filtrage
-Pagination & filtering
+🗃️ Pagination et filtrage avancés
+Advanced pagination and filtering
 
 📄 Documentation Swagger intégrée
-Integrated Swagger API docs
+Integrated Swagger API documentation
 
 🧪 Tests unitaires et d’intégration
-Unit & integration tests (mock & real DB)
+Unit and integration tests (mock & real DB)
 
 🚀 Lancer le projet / Getting Started
-Pré-requis / Prerequisites
+✅ Prérequis / Prerequisites
 Java 17+
 
 Docker
 
 Maven
 
-Étapes / Steps
+⚙️ Étapes / Setup Instructions
 bash
 Copier
 Modifier
+# 1. Cloner le dépôt / Clone the repository
 git clone https://github.com/GeekHamza93/OMS-Order-Management-System.git
 cd OMS-Order-Management-System
 
-# PostgreSQL avec Docker
+# 2. Lancer PostgreSQL via Docker
 docker-compose up -d
 
-# Lancer l'application
+# 3. Démarrer l'application
 ./mvnw spring-boot:run
-Swagger disponible ici / Swagger UI available at:
+📍 Accès Swagger / Swagger UI:
 http://localhost:8080/swagger-ui.html
 
 🔐 Authentification JWT / JWT Authentication
-POST /api/auth/register → inscription / sign up
+POST /api/auth/register → Inscription / Sign up
 
-POST /api/auth/authenticate → obtenir un token / get a token
+POST /api/auth/authenticate → Générer un token / Generate token
 
-Ajouter le token dans les headers / Add token to headers:
+👉 Ajouter le token dans les en-têtes HTTP :
+Include the token in request headers:
 Authorization: Bearer <token>
 
 📁 Structure du projet / Project Structure
-text
+bash
 Copier
 Modifier
 src/
-├── config         # Config sécurité / Security config
+├── config         # Configuration (sécurité, Swagger, JWT)
 ├── controller     # Contrôleurs REST / REST controllers
 ├── dto            # Objets de transfert / DTOs
 ├── entity         # Entités JPA / JPA entities
-├── repository     # Accès BDD / Repositories
+├── repository     # Requêtes BDD / Repositories
 ├── service        # Logique métier / Business logic
-├── utils          # Outils / Utilities
-✅ Exemple de test / Sample Test
+├── utils          # Utilitaires / Utilities
+✅ Exemple de test / Sample Unit Test
 java
 Copier
 Modifier
@@ -92,21 +94,22 @@ void testCreateOrder() {
     OrderDto savedOrder = orderService.create(order);
     assertNotNull(savedOrder.getId());
 }
-📌 Roadmap (à venir / coming soon)
+📌 Roadmap (à venir / Coming Soon)
  Dashboard Angular (front-end)
 
  Export PDF / Excel
 
- Webhook pour intégration tiers
+ Intégration de webhooks / Webhook integration
 
  Notifications par email / Email notifications
 
 🤝 Contributions
-FR : Les pull requests sont les bienvenues. Merci de créer une issue avant toute modification majeure.
-EN : Pull requests are welcome. Please open an issue before making major changes.
+FR : Les contributions sont les bienvenues. Merci de soumettre une issue avant toute modification majeure.
+
+EN : Contributions are welcome. Please open an issue before making any major changes.
 
 👤 Auteur / Author
 Mohammed-Hamza Attar
-🧑‍💻 Freelance Java / Spring Boot / Full-Stack
+🧑‍💻 Freelance Java / Spring Boot / Full-Stack Developer
 📫 med.hamza.attar@gmail.com
 🔗 Portfolio
