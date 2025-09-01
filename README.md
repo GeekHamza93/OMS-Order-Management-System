@@ -1,64 +1,149 @@
-# 🧾 OMS – Order Management System
+OMS — Order Management System (Quarkus)
 
-🇫🇷 FR  
-OMS est une application Java Spring Boot, modulaire et évolutive, conçue pour centraliser, suivre et gérer les commandes de bout en bout.
+POC d’un Order Management System basé sur Quarkus, pensé pour la rapidité, la faible empreinte mémoire et le déploiement cloud-native (Kubernetes / containers). Focus : API REST, persistance, tests, et build natif.
 
-🇬🇧 EN  
-OMS is a modular and scalable Java Spring Boot application designed to centralize, track, and manage orders from end to end.
+Pourquoi Quarkus ?
+	•	Démarrage ultra-rapide et empreinte mémoire réduite (idéal serverless/Kubernetes)
+	•	Extensions prêtes à l’emploi (RESTEasy, Panache, OpenAPI, OIDC…)
+	•	Build JVM et natif (GraalVM) dans le même projet
+	•	Intégration fluide Docker/Kubernetes
 
----
+Stack technique
+	•	Langage : Java 21
+	•	Framework : Quarkus (RESTEasy Reactive, Hibernate ORM Panache, Mutiny)
+	•	Base de données : PostgreSQL (prod/dev) / H2 (tests)
+	•	Migration : Flyway
+	•	Tests : JUnit 5, RestAssured
+	•	Documentation : OpenAPI/Swagger UI
+	•	CI/CD (exemple) : GitHub Actions (build + tests)
 
-## 🏗️ Stack technique / Tech Stack
+Modules & domaines (MVP)
+	•	Orders : CRUD commandes (statut, montant, date)
+	•	Customers : CRUD clients (email unique)
+	•	(Optionnel) Inventory : à venir (réservation stock, events)
 
-- **Backend**: Java 17, Spring Boot 3, Spring Data JPA, Hibernate  
-- **Base de données / Database**: PostgreSQL  
-- **Sécurité / Security**: Spring Security, JWT  
-- **Documentation API / API Docs**: Swagger / OpenAPI  
-- **Tests**: JUnit 5, Mockito  
-- **DevOps**: Docker, Maven  
-- **IDE**: IntelliJ IDEA
+Architecture
+	•	API REST → Services applicatifs → Repositories (Panache) → PostgreSQL
+	•	Modèle réactif (Mutiny) possible sur endpoints de lecture
+	•	Séparation claire : resource (REST), service, repository, domain
 
----
+Extensions Quarkus (exemples)
+quarkus-resteasy-reactive, quarkus-resteasy-reactive-jackson
+quarkus-hibernate-orm-panache, quarkus-jdbc-postgresql
+quarkus-flyway, quarkus-smallrye-openapi
+quarkus-arc, quarkus-oidc (optionnel)
+Démarrage rapide
 
-## 🔧 Fonctionnalités clés / Key Features
+1) Prérequis
+	•	Java 21, Maven Wrapper (./mvnw)
+	•	Docker (pour DB locale, optionnel mais recommandé)
 
-- 🔐 **Authentification JWT** (admin / utilisateur)  
-  *JWT-based authentication (admin / user roles)*
+2) Base de données locale (Docker)
+docker run --name oms-postgres -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=oms -p 5432:5432 -d postgres:16
 
-- 📦 **Gestion des commandes** (CRUD complet)  
-  *Full CRUD operations for orders*
+3) Lancer l’application (mode dev)
+./mvnw quarkus:dev
+•	Swagger UI : http://localhost:8080/q/swagger-ui
+	•	Health : http://localhost:8080/q/health
 
-- 👥 **Gestion des clients et des rôles**  
-  *Customer and role management*
+4) Variables de configuration (application.properties)
+quarkus.datasource.db-kind=postgresql
+quarkus.datasource.username=postgres
+quarkus.datasource.password=postgres
+quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/oms
 
-- 🗃️ **Pagination et filtrage avancés**  
-  *Advanced pagination and filtering*
+quarkus.hibernate-orm.database.generation=none
+quarkus.flyway.migrate-at-start=true
 
-- 📄 **Documentation Swagger intégrée**  
-  *Integrated Swagger API documentation*
+quarkus.http.port=8080
 
-- 🧪 **Tests unitaires et d’intégration**  
-  *Unit and integration tests (mock & real DB)*
+%test.quarkus.datasource.db-kind=h2
+%test.quarkus.datasource.jdbc.url=jdbc:h2:mem:oms;DB_CLOSE_DELAY=-1
 
----
+Tests
+./mvnw clean test
 
-## 🚀 Lancer le projet / Getting Started
+Tests unitaires JUnit 5
+	•	Tests d’API RestAssured (profil %test avec H2)
 
-### ✅ Prérequis / Prerequisites
+Endpoints (MVP)
 
-- Java 17+  
-- Docker  
-- Maven
+Customers
+	•	GET    /api/customers — liste paginée
+	•	POST   /api/customers — créer
+	•	GET    /api/customers/{id} — détail
+	•	PUT    /api/customers/{id} — mettre à jour
+	•	DELETE /api/customers/{id} — supprimer
 
-### ⚙️ Étapes / Setup Instructions
+Orders
+	•	GET    /api/orders — liste (filtre: status, customerId)
+	•	POST   /api/orders — créer
+	•	GET    /api/orders/{id} — détail
+	•	PUT    /api/orders/{id} — mettre à jour (ex: status)
+	•	DELETE /api/orders/{id} — supprimer
 
-bash
-# 1. Cloner le dépôt / Clone the repository
-git clone https://github.com/GeekHamza93/OMS-Order-Management-System.git
-cd OMS-Order-Management-System
+Exemples cURL
 
-# 2. Lancer PostgreSQL via Docker
-docker-compose up -d
+# Créer un client
+curl -X POST http://localhost:8080/api/customers \
+  -H "Content-Type: application/json" \
+  -d '{"firstName":"Alice","lastName":"Martin","email":"alice@example.com"}'
 
-# 3. Démarrer l'application
-./mvnw spring-boot:run
+# Créer une commande
+curl -X POST http://localhost:8080/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{"customerId":1,"amount":129.9,"status":"CREATED"}'
+OpenAPI / Swagger
+	•	Spécification : http://localhost:8080/q/openapi
+	•	UI : http://localhost:8080/q/swagger-ui
+
+Docker & exécution
+
+Image locale
+./mvnw clean package
+docker build -t oms-quarkus:local .
+docker run --rm -p 8080:8080 --env-file .env oms-quarkus:local
+Docker Compose (DB + app)
+version: "3.8"
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: oms
+    ports: ["5432:5432"]
+  app:
+    image: oms-quarkus:local
+    depends_on: [db]
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://db:5432/oms
+      QUARKUS_DATASOURCE_USERNAME: postgres
+      QUARKUS_DATASOURCE_PASSWORD: postgres
+    ports: ["8080:8080"]
+Migrations (Flyway)
+	•	Dossier : src/main/resources/db/migration
+	•	Exemple : V1__init.sql (tables customers, orders, contraintes)
+
+Build natif (GraalVM)
+# Requiert GraalVM ou container buildpack
+./mvnw package -Pnative
+
+# Exécution
+./target/oms-*-runner
+
+Qualité & CI (suggestion)
+	•	GitHub Actions : workflow build.yml (trigger PR/push)
+	•	Maven build + tests
+	•	(Optionnel) Sonar (analyse qualité)
+	•	Ajouter des badges en haut du README (build, coverage)
+
+Roadmap
+	•	Ajouter la gestion des stocks
+	•	Intégrer Kafka pour l’event-driven
+	•	Mettre en place CI/CD GitHub Actions (build + test + analyse Sonar)
+	•	Ajouter la sécurité OIDC (Keycloak, JWT)
+
+
+
+
