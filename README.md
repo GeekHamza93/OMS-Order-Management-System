@@ -1,6 +1,6 @@
-# 📦 OMS — Order Management System (Quarkus)
+#  OMS — Order Management System (Quarkus)
 
-## 🚀 Description
+##  Description
 POC d’un **Order Management System** basé sur **Quarkus**, pensé pour :
 - La rapidité
 - La faible empreinte mémoire
@@ -10,15 +10,15 @@ Focus : **API REST, persistance, tests, build natif.**
 
 ---
 
-## 🤔 Pourquoi Quarkus ?
-- ⚡ **Démarrage ultra-rapide** et empreinte mémoire réduite (idéal serverless/Kubernetes)
-- 📦 **Extensions prêtes à l’emploi** (RESTEasy, Panache, OpenAPI, OIDC…)
-- 🔄 **Build JVM et natif** (GraalVM) dans le même projet
-- 🐳 Intégration fluide avec **Docker/Kubernetes**
+##  Pourquoi Quarkus ?
+-  **Démarrage ultra-rapide** et empreinte mémoire réduite (idéal serverless/Kubernetes)
+-  **Extensions prêtes à l’emploi** (RESTEasy, Panache, OpenAPI, OIDC…)
+-  **Build JVM et natif** (GraalVM) dans le même projet
+-  Intégration fluide avec **Docker/Kubernetes**
 
 ---
 
-## 🛠️ Stack technique
+## Stack technique
 - **Langage** : Java 21
 - **Framework** : Quarkus (RESTEasy Reactive, Hibernate ORM Panache, Mutiny)
 - **Base de données** : PostgreSQL (prod/dev) / H2 (tests)
@@ -29,14 +29,14 @@ Focus : **API REST, persistance, tests, build natif.**
 
 ---
 
-## 📂 Modules & Domaines (MVP)
+##  Modules & Domaines (MVP)
 - **Customers** : CRUD clients (email unique)
 - **Orders** : CRUD commandes (statut, montant, date)
 - *(Optionnel à venir)* **Inventory** : gestion du stock, événements
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 ```
 API REST → Services applicatifs → Repositories (Panache) → PostgreSQL
 ```
@@ -46,7 +46,7 @@ API REST → Services applicatifs → Repositories (Panache) → PostgreSQL
 
 ---
 
-## 🔌 Extensions Quarkus (exemples)
+##  Extensions Quarkus (exemples)
 - `quarkus-resteasy-reactive`
 - `quarkus-resteasy-reactive-jackson`
 - `quarkus-hibernate-orm-panache`
@@ -58,14 +58,14 @@ API REST → Services applicatifs → Repositories (Panache) → PostgreSQL
 
 ---
 
-## ⚙️ Prérequis
+##  Prérequis
 - Java 21
 - Maven Wrapper (`./mvnw`)
 - Docker (pour DB locale recommandé)
 
 ---
 
-## 🗄️ Base de données locale (Docker)
+##  Base de données locale (Docker)
 ```bash
 docker run --name oms-postgres \
   -e POSTGRES_PASSWORD=postgres \
@@ -75,7 +75,7 @@ docker run --name oms-postgres \
 
 ---
 
-## ▶️ Lancer l’application (mode dev)
+## ▶ Lancer l’application (mode dev)
 ```bash
 ./mvnw quarkus:dev
 ```
@@ -84,7 +84,7 @@ docker run --name oms-postgres \
 
 ---
 
-## 🔧 Variables de configuration (`application.properties`)
+##  Variables de configuration (`application.properties`)
 ```properties
 quarkus.datasource.db-kind=postgresql
 quarkus.datasource.username=postgres
@@ -102,7 +102,7 @@ quarkus.http.port=8080
 
 ---
 
-## 🧪 Tests
+##  Tests
 - **Unitaires** : JUnit 5
 - **API** : RestAssured (profil `%test` avec H2)
 
@@ -113,7 +113,7 @@ Exécution :
 
 ---
 
-## 🌐 Endpoints (MVP)
+##  Endpoints (MVP)
 ### Customers
 - `GET /api/customers` — liste paginée
 - `POST /api/customers` — créer
@@ -130,7 +130,7 @@ Exécution :
 
 ---
 
-## 📌 Exemples cURL
+##  Exemples cURL
 Créer un client :
 ```bash
 curl -X POST http://localhost:8080/api/customers \
@@ -147,13 +147,13 @@ curl -X POST http://localhost:8080/api/orders \
 
 ---
 
-## 📖 OpenAPI / Swagger
+##  OpenAPI / Swagger
 - Spécification : [http://localhost:8080/q/openapi](http://localhost:8080/q/openapi)
 - UI : [http://localhost:8080/q/swagger-ui](http://localhost:8080/q/swagger-ui)
 
 ---
 
-## 🐳 Docker & Exécution
+##  Docker & Exécution
 ### Image locale
 ```bash
 ./mvnw clean package
@@ -188,13 +188,13 @@ services:
 
 ---
 
-## 🗃️ Migrations (Flyway)
+##  Migrations (Flyway)
 - Dossier : `src/main/resources/db/migration`
 - Exemple : `V1__init.sql` (tables `customers`, `orders`, contraintes)
 
 ---
 
-## ⚡ Build natif (GraalVM)
+##  Build natif (GraalVM)
 Requiert **GraalVM** ou container buildpack.
 ```bash
 ./mvnw package -Pnative
@@ -203,7 +203,7 @@ Requiert **GraalVM** ou container buildpack.
 
 ---
 
-## ✅ Qualité & CI
+##  Qualité & CI
 ### GitHub Actions Workflow (`.github/workflows/build.yml`)
 ```yaml
 name: Build & Test
@@ -263,7 +263,7 @@ jobs:
 
 ---
 
-## 🛣️ Roadmap
+##  Roadmap
 - [ ] Ajouter la gestion des stocks (Inventory)
 - [ ] Intégrer **Kafka** pour l’event-driven
 - [ ] CI/CD complet (**GitHub Actions + Sonar + Docker Registry**)
@@ -272,12 +272,12 @@ jobs:
 
 ---
 
-## ✍️ Auteur
+##  Auteur
 Hamza Attar — *Tech Lead Full-Stack / Java & Quarkus Enthusiast*
 
 ---
 
-## 🧱 Arborescence proposée
+##  Arborescence proposée
 ```text
 .
 ├─ .github/
@@ -300,198 +300,6 @@ Hamza Attar — *Tech Lead Full-Stack / Java & Quarkus Enthusiast*
 └─ sonar-project.properties (optionnel)
 ```
 
----
-
-## 🧩 Configuration — fichiers ajoutés
-
-### `src/main/resources/application.properties`
-```properties
-# Datasource
-quarkus.datasource.db-kind=postgresql
-quarkus.datasource.username=${DB_USER:postgres}
-quarkus.datasource.password=${DB_PASSWORD:postgres}
-quarkus.datasource.jdbc.url=${DB_URL:jdbc:postgresql://localhost:5432/oms}
-
-# Hibernate / Flyway
-quarkus.hibernate-orm.database.generation=none
-quarkus.flyway.migrate-at-start=true
-
-# HTTP
-quarkus.http.port=${PORT:8080}
-
-# OpenAPI / Swagger-UI
-quarkus.smallrye-openapi.path=/q/openapi
-quarkus.swagger-ui.always-include=true
-
-# Logs
-quarkus.log.console.format=%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n
-quarkus.log.level=INFO
-
-# Test profile overrides
-%test.quarkus.datasource.db-kind=h2
-%test.quarkus.datasource.jdbc.url=jdbc:h2:mem:oms;DB_CLOSE_DELAY=-1
-%test.quarkus.datasource.username=sa
-%test.quarkus.datasource.password=
-```
-
-### `src/main/resources/db/migration/V1__init.sql`
-```sql
--- Customers table
-CREATE TABLE IF NOT EXISTS customers (
-    id          BIGSERIAL PRIMARY KEY,
-    first_name  VARCHAR(80)  NOT NULL,
-    last_name   VARCHAR(80)  NOT NULL,
-    email       VARCHAR(180) NOT NULL UNIQUE,
-    created_at  TIMESTAMP    NOT NULL DEFAULT NOW()
-);
-
--- Orders table
-CREATE TABLE IF NOT EXISTS orders (
-    id           BIGSERIAL PRIMARY KEY,
-    customer_id  BIGINT      NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
-    amount       NUMERIC(12,2) NOT NULL CHECK (amount >= 0),
-    status       VARCHAR(32) NOT NULL,
-    created_at   TIMESTAMP   NOT NULL DEFAULT NOW(),
-    updated_at   TIMESTAMP   NOT NULL DEFAULT NOW()
-);
-
-CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id);
-CREATE INDEX IF NOT EXISTS idx_orders_status   ON orders(status);
-```
-
-### `.env.example`
-```env
-# Database
-DB_URL=jdbc:postgresql://localhost:5432/oms
-DB_USER=postgres
-DB_PASSWORD=postgres
-
-# HTTP
-PORT=8080
-```
-
-### `Dockerfile` (JVM)
-```dockerfile
-# ---------- Build stage ----------
-FROM maven:3.9.9-eclipse-temurin-21 AS build
-WORKDIR /workspace
-COPY pom.xml .
-RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -q -DskipTests dependency:go-offline
-COPY src ./src
-RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -DskipTests package
-
-# ---------- Runtime stage ----------
-FROM eclipse-temurin:21-jre
-ENV JAVA_OPTS="-XX:+UseG1GC -XX:MaxRAMPercentage=75"
-WORKDIR /app
-COPY --from=build /workspace/target/*-runner.jar /app/app.jar
-EXPOSE 8080
-ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar /app/app.jar"]
-```
-
-### `Dockerfile.native` (optionnel)
-```dockerfile
-FROM quay.io/quarkus/quarkus-micro-image:2.0
-WORKDIR /work/
-COPY target/*-runner /work/application
-EXPOSE 8080
-ENTRYPOINT ["./application","-Dquarkus.http.host=0.0.0.0"]
-```
-
-### `.dockerignore`
-```text
-**/target/
-**/.mvn/
-**/.idea/
-**/.vscode/
-**/.DS_Store
-**/node_modules/
-.mvn/
-.git/
-.gitignore
-Dockerfile*
-**/*.iml
-```
-
----
-
-## 🧪 Maven — plugins utiles (`pom.xml` extrait)
-```xml
-<build>
-  <plugins>
-    <!-- Quarkus plugin -->
-    <plugin>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-maven-plugin</artifactId>
-      <version>${quarkus.platform.version}</version>
-      <extensions>true</extensions>
-    </plugin>
-
-    <!-- Tests -->
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <version>3.2.5</version>
-      <configuration>
-        <trimStackTrace>true</trimStackTrace>
-      </configuration>
-    </plugin>
-
-    <!-- Couverture (optionnel) -->
-    <plugin>
-      <groupId>org.jacoco</groupId>
-      <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.8.11</version>
-      <executions>
-        <execution>
-          <goals>
-            <goal>prepare-agent</goal>
-          </goals>
-        </execution>
-        <execution>
-          <id>report</id>
-          <phase>verify</phase>
-          <goals>
-            <goal>report</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-
-    <!-- Docker build via Jib (alternative à Dockerfile) -->
-    <plugin>
-      <groupId>com.google.cloud.tools</groupId>
-      <artifactId>jib-maven-plugin</artifactId>
-      <version>3.4.3</version>
-      <configuration>
-        <from><image>eclipse-temurin:21-jre</image></from>
-        <to>
-          <image>ghcr.io/${project.groupId}/${project.artifactId}</image>
-          <tags>
-            <tag>${project.version}</tag>
-          </tags>
-        </to>
-        <container>
-          <jvmFlags>
-            <jvmFlag>-XX:+UseG1GC</jvmFlag>
-            <jvmFlag>-XX:MaxRAMPercentage=75</jvmFlag>
-          </jvmFlags>
-          <ports>
-            <port>8080</port>
-          </ports>
-        </container>
-      </configuration>
-    </plugin>
-  </plugins>
-</build>
-```
-
-> Astuce : avec **Jib**, vous pouvez construire et pousser l’image *sans Docker daemon* :
-```bash
-./mvnw -Pjib -DskipTests jib:build
-```
-
----
 
 ## 🧪 CI/CD — GitHub Actions (`.github/workflows/ci.yml`)
 ```yaml
