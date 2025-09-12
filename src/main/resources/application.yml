@@ -1,5 +1,29 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    jdbc:
+      # En local: localhost ; en docker-compose (service "db"): db
+      url: ${DB_URL:jdbc:postgresql://localhost:5432/oms}
+  hibernate-orm:
+    database:
+      generation: none
+  flyway:
+    migrate-at-start: true
+  http:
+    port: ${PORT:8080}
+  smallrye-openapi:
+    path: /q/openapi
+  swagger-ui:
+    always-include: true
+  log:
+    level: INFO
+
+# tes blocs existants
 greeting:
   message: "hello"
+
 mp:
   messaging:
     outgoing:
@@ -11,3 +35,8 @@ mp:
           offset:
             reset: "earliest"
         topic: "words"
+
+# (optionnel) Kafka local
+kafka:
+  bootstrap:
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
