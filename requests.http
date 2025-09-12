@@ -1,0 +1,28 @@
+### List customers
+GET http://localhost:8080/api/customers
+
+### Create customer
+POST http://localhost:8080/api/customers
+Content-Type: application/json
+
+{
+  "firstName": "Zineb",
+  "lastName": "Alaoui",
+  "email": "zineb@example.com"
+}
+
+### Get customer
+GET http://localhost:8080/api/customers/1
+
+### Create order
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "status": "CREATED",
+  "amount": 199.50
+}
+
+### List orders (filter by customer)
+GET http://localhost:8080/api/orders?customerId=1
